@@ -1,0 +1,3 @@
+appturbo_exercise:
+    resource: "@AppturboExerciseBundle/Resources/config/routing.yml"
+    prefix:   /

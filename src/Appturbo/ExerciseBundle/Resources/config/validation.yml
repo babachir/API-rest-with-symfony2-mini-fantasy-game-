@@ -1,0 +1,25 @@
+Appturbo\ExerciseBundle\Entity\Knight:
+    properties:
+        name:
+            - NotBlank: ~
+            - NotNull: ~
+            - Length:
+                min: 2
+                max: 50
+                minMessage: "The name must be at least {{ limit }} characters length."
+                maxMessage: "The name cannot be longer than {{ limit }} characters length"
+        strength:
+            - NotBlank: ~
+            - NotNull: ~
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid type {{ type }}.
+
+Appturbo\ExerciseBundle\Entity\Troll:
+    properties:
+        strength:
+            - NotBlank: ~
+            - NotNull: ~
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid type {{ type }}.

@@ -1,0 +1,43 @@
+# ----------
+# Knight Resource
+# ----------
+post_knight:
+    pattern: /knight
+    defaults: { _controller: AppturboExerciseBundle:Knight:postKnight, _format: json }
+    requirements:
+        _method: POST
+
+get_knights:
+    pattern: /knight
+    defaults: { _controller: AppturboExerciseBundle:Knight:getKnights, _format: json }
+    requirements:
+        _method: GET
+
+get_knight:
+    pattern: /knight/{id}
+    defaults: { _controller: AppturboExerciseBundle:Knight:getKnight, _format: json }
+    requirements:
+        id: \d+
+        _method: GET
+
+# ----------
+# Troll Resource
+# ----------
+post_troll:
+    pattern: /troll
+    defaults: { _controller: AppturboExerciseBundle:Troll:postTroll, _format: json }
+    requirements:
+        _method: POST
+
+get_trolls:
+    pattern: /troll
+    defaults: { _controller: AppturboExerciseBundle:Troll:getTrolls, _format: json }
+    requirements:
+        _method: GET
+
+get_troll:
+    pattern: /troll/{id}
+    defaults: { _controller: AppturboExerciseBundle:Troll:getTroll, _format: json }
+    requirements:
+        id: \d+
+        _method: GET

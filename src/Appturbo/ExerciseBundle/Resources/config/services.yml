@@ -1,0 +1,18 @@
+parameters:
+    appturbo_exercise.knight.handler.class: Appturbo\ExerciseBundle\Handler\KnightHandler
+    appturbo_exercise.knight.class: Appturbo\ExerciseBundle\Entity\Knight
+    appturbo_exercise.troll.handler.class: Appturbo\ExerciseBundle\Handler\TrollHandler
+    appturbo_exercise.troll.class: Appturbo\ExerciseBundle\Entity\Troll
+#    appturbo_exercise.example.class: Appturbo\ExerciseBundle\Example
+
+services:
+    appturbo_exercise.knight.handler:
+        class: %appturbo_exercise.knight.handler.class%
+        arguments: [ @doctrine.orm.entity_manager, %appturbo_exercise.knight.class%, @form.factory ]
+    appturbo_exercise.troll.handler:
+        class: %appturbo_exercise.troll.handler.class%
+        arguments: [ @doctrine.orm.entity_manager, %appturbo_exercise.troll.class%, @form.factory ]
+
+#    appturbo_exercise.example:
+#        class: %appturbo_exercise.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
