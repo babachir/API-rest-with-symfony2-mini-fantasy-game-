@@ -68,6 +68,7 @@ This folder contains a unit test which will test the final result using a test d
 ### About the results
 The results are important but there is no unique solution, there are various way to pass the tests successfully.
 We prefer a not so perfect solution than no solution at all even if you have to change a little bit the structure of the project.
+For example we have included the FOSRestBundle because it can be handy but as the documentation of this bundle is a litte weird, you may not use it if you prefere another solution.
 
 **Don't forget that you will have to explain and justify your choices during an interview. This exercise is mainly a way
 to provide discussion material for it.**
