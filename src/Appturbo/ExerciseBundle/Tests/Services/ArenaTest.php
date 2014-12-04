@@ -20,16 +20,6 @@ class ArenaTest extends WebTestCase
         $this->em = static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
     }
 
-    public function testFight()
-    {
-        $troll = $this->em->getRepository('AppturboExerciseBundle:Troll')->find(1);
-        $knight = $this->em->getRepository('AppturboExerciseBundle:Knight')->find(1);
-
-        $result = Arena::fight($troll, $knight);
-
-        $this->assertEquals(get_class($result), 'Appturbo\ExerciseBundle\Entity\Knight');
-    }
-
     public function testFight2()
     {
         $knight = $this->em->getRepository('AppturboExerciseBundle:Knight')->find(1);

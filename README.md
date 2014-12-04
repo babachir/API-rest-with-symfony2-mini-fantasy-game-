@@ -44,12 +44,13 @@ in the *app/AppKernel.php* and the *app/config/routing.yml* is already configure
 Now read the **INSTRUCTIONS.md** file located at the root of the project. It contains all the instructions and hints
 for the project.
 
+You can of course do several commits during the test to save your work. We'll look at the final result only.
+
 ## Submitting your solution
-To submit your solution, you can simply do a **Pull Request** on the exercise repository.
-You can also submit your *src/Appturbo* folder with the solution in an ZIP archive.
+To submit your solution, you can simply push your work into the repository (it's been made only for you).
+
 
 ## How you will be evaluated
-
 A bunch of tests have been written under the *src/Appturbo/ExerciceBundle/Tests*
 
 ### Controllers Tests
@@ -59,7 +60,6 @@ Those tests are functional tests. They will test your API endpoints, the respons
 This folder contains a unit test which will test the final result using a test dataset
 
 ### Procedure which will be executed to test your solution
-
 * We will clone your sources
 * We will set up the Symfony project
 * We will import the database structure with the doctrine tool `php app/console doctrine:schema:update --force`
@@ -69,5 +69,5 @@ This folder contains a unit test which will test the final result using a test d
 The results are important but there is no unique solution, there are various way to pass the tests successfully.
 We prefer a not so perfect solution than no solution at all even if you have to change a little bit the structure of the project.
 
-**Don't forget that you will have to explain and justify your choices during an interview. This exercise is a way
+**Don't forget that you will have to explain and justify your choices during an interview. This exercise is mainly a way
 to provide discussion material for it.**

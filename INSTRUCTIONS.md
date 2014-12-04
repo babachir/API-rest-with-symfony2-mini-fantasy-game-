@@ -2,23 +2,25 @@
 
 This exercise aims to implement a micro API to simulate a fantasy themed mini-game.
 
+Read all the instructions carefully before beginning to code.
+
 ## Context
-This mini-game is very simple. We should be able to create 2 types
-of fighters : Knights and Trolls.
+This mini-game is very simple. 
 
-Each of them has different types of stats resulting in a Power Level.
+There is an Arena where duels are held. 
 
-Then there is an Arena where duels are held. An arena can register 2 fighters,
-the fighter with the higher Power Level wins the duel.
+* An arena can register 2 fighters.
+* A fighter has different stats which results in a Power Level
+* The fighter with the higher Power Level wins the duel.
+
 
 ## Data Model
 We will now explain in details the data model.
 
 ### FighterInterface
-The **FighterInterface** is the interface that will be used by the **Arena** to organize fights 
-between combatants. The combatants can be totally different, if they implement this interface, they can fight in the Arena
+The **FightInterface** is the interface to describe that a class can fight.
 
-There are 2 methods in **FighterInterface** :
+There are 2 methods in **FightInterface** :
 
 * `getId()` returns an Integer which represents the ID of the combatant within its own class
 * `calculatePowerLevel()` returns an Integer which represents the Power level of the Fighter
@@ -37,30 +39,25 @@ The Knight has 2 specific attributes:
 * the **strength** (Integer) which represents the strength of the Knight
 * the **weaponPower** (Integer) which represents the power of the weapon wielded by the Knight
 
-The Knight is a fighter. As such it implements the **FighterInterface**
+The Knight is a fighter. As such it implements the **FightInterface**
 
 The Power level of a Knight can be obtained by adding its **strength** and its **weaponPower**
 
 
-### Troll class ###
-The **Troll** class is also an entity that can be stored in the database.
-
-It has only a specific attribute:
-
-* the **strength** (Integer) which represents the strength of the Troll
-
-The Troll is a fighter class. As such it implements the **FighterInterface**
-
-The Power level of a Troll can be obtained by doubling its **strength**
-
 ## The Arena Service
-This service is only here to simulate a duel between 2 classes implementing the **FighterInterface** 
+This service is only here to simulate a duel between 2 fighters.
 
-It is a simple class with a unique static method called `fight` which takes 2 combatants and made them fight
+It is a simple class with a unique static method called `fight` which takes 2 fighters and made them fight
 by comparing their Power Level.
 
 The method should return the winner (as an object) or return the 0 value if the duel is a draw (the
 2 combatants have the same Power Level)
+
+In this little test, only the Knights are able to fight but the Arena's duels should stay generic.
+
+We can imagine for example other classes like Trolls or Goblins (which are obviously not humans) fighting
+in the arena too but we'll ignore them for this exercise.
+
 
 ## API Design
 This mini-game simulator should be designed as an API.
@@ -73,7 +70,8 @@ All the content exchanges with the API should be done in JSON
 All the endpoints should have the same behaviour with status codes
 sent back to the client :
 
-* 201 status code when the request is correct and the response has been correctly sent back
+* 200 status code when the request has been successful
+* 201 status code when the request has been fulfilled and resulted in a new resource being created
 * 400 status code when the request is wrong (bad parameters, not a JSON payload etc...)
 * 404 status code when the resource is unavailable or does not exist
 
@@ -93,7 +91,8 @@ When building a REST API, a good practice is to have very thin controllers with 
 
 All the logic can be relocated into special services called **Handlers**.
 We have created a **HandlerInterface** located at *src/Appturbo/ExerciseBundle/Handler/HandlerInterface.php* which defines how we will interact with our resources. 
-You can create custom handlers implementing this interface for your controllers to host a large part of the logic.
+You can create custom handlers implementing this interface for your controllers to host a large part of the logic 
+(even if in our little exercise, given the low complexity, the gains are not quite visible).
 
 This part is optional. Don't forget that having a less elegant but working project is more important. 
 
@@ -102,12 +101,9 @@ This part is optional. Don't forget that having a less elegant but working proje
 The project is not empty by default. You will find several files already written for you:
 
 * *Resources/config/routing.yml* where you'll find the API endpoints
-* *Model/FighterInterface*
-* *Model/Human*
+* *Model/FightInterface*
 * *Handler/HandlerInterface*
 * *Exception/InvalidFormException*
-
-
 
 
 ## What you have to do ##
@@ -123,7 +119,6 @@ For the API to work and for the tests to pass, you need to:
 The tests are executed in this order:
 
 * **KnightControllerTest**
-* **TrollControllerTest**
 * **ArenaTest**
 
 You'll note that the controllers tests insert some data in the database in order to test the POST queries.

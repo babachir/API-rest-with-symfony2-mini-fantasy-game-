@@ -32,8 +32,9 @@ interface HandlerInterface
 
     /**
      * Register a resource
-     * @param array $parameters
-     * @return array|View|null
+     *
+     * @param $resource
+     * @return mixed
      */
-    public function post(array $parameters);
+    public function post($resource);
 }
