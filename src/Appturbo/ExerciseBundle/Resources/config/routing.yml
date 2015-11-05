@@ -19,3 +19,4 @@ get_knight:
     requirements:
         id: \d+
         _method: GET
+

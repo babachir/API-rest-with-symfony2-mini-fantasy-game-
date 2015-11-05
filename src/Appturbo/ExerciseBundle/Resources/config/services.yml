@@ -4,6 +4,8 @@ parameters:
 #    appturbo_exercise.example.class: Appturbo\ExerciseBundle\Example
 
 services:
+    appturbo_exercise.services:
+        class: Appturbo\ExerciseBundle\Services\Arena
     appturbo_exercise.knight.handler:
         class: %appturbo_exercise.knight.handler.class%
         arguments: [ @doctrine.orm.entity_manager, %appturbo_exercise.knight.class%, @form.factory ]

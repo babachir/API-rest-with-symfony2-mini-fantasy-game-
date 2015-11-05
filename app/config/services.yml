@@ -1,0 +1,5 @@
+services:
+    my_mailer:
+        class: ExerciseBundle\Serices\Knight
+        scope: client
+        arguments: ["@client_configuration"]
