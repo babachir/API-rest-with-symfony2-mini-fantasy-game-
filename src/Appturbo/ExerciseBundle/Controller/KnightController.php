@@ -44,23 +44,40 @@ class KnightController extends Controller
 
 
             $AllRequest = $request->request->all();
-            $name = $AllRequest['name' ];
-           if(preg_match("/^[a-zאהגיטךכןמצפשüû\s]*$/i", $name))
-           {
-               var_dump(preg_match("/^[a-zאהגיטךכןמצפשüû\s]*$/i", $name));
-                exit();
-           }
+            /*to validate the post value*/
+            if ($AllRequest['name'] != "" && isset($AllRequest['name']) && isset($AllRequest['name']) && isset($AllRequest['weaponPower'])) {
+                $name = $AllRequest['name'];
+                $strength = $AllRequest['strength'];
+                $weaponPower = $AllRequest['weaponPower'];
+
+                /*if name is a string and if strength and power is a int*/
+                if (preg_match("/^[a-zאהגיטךכןמצפשüû\s]*$/i", $name) && preg_match("/^([0-9]+)$/", $strength) && preg_match("/^([0-9]+)$/", $weaponPower)) {
+                    $knight = new Knight();
+                    $knight->setName($name);
+                    $knight->setStrength($strength);
+                    $knight->setWeaponPower($weaponPower);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($knight);
+                    $em->flush();
+                    $jsonReturned = array("success" => "true", "message" => "the knight was  successfuly created");
+
+
+                } else {
+                    $jsonReturned = array("success" => "false", "message" => "the name must be a string and strength or weaponPower must be a int");
+                }
+            } else {
+                $jsonReturned = array("success" => "false", "message" => "name, strength or weaponPower can't be null");
+            }
+            $serializer = $this->container->get('serializer');
+
+
+            $reports = $serializer->serialize($jsonReturned, 'json');
+            return new Response($reports);
 
         }
 
 
-
-
     }
-
-
-
-
 
 
 }
