@@ -21,7 +21,7 @@ get_knight:
         _method: GET
 
 get_knightVsKnight:
-    pattern: /knight/{id}/{id2}
+    pattern: /fight/{id}/{id2}
     defaults: { _controller: AppturboExerciseBundle:Knight:getKnightvsknight, _format: json }
     requirements:
         id: \d+
