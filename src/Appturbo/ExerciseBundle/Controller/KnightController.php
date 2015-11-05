@@ -12,7 +12,10 @@ class KnightController extends Controller
     {
         /*$arena = $this->container->get('appturbo_exercise.services');*/
         $knights = $this->getDoctrine()->getRepository("AppturboExerciseBundle:Knight")->findAll();
-
+        if(empty($knights))
+        {
+            $knights = array("status"=>"404");
+        }
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($knights, 'json');
         return new Response($reports);
@@ -23,8 +26,12 @@ class KnightController extends Controller
     public function getKnightAction($id)
     {
         /*$arena = $this->container->get('appturbo_exercise.services');*/
-        $knights = $this->getDoctrine()->getRepository("AppturboExerciseBundle:Knight")->findById($id);
 
+        $knights = $this->getDoctrine()->getRepository("AppturboExerciseBundle:Knight")->findById($id);
+        if(empty($knights))
+        {
+            $knights = array("status"=>"404");
+        }
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($knights, 'json');
         return new Response($reports);
@@ -59,14 +66,14 @@ class KnightController extends Controller
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($knight);
                     $em->flush();
-                    $jsonReturned = array("success" => "true", "message" => "the knight was  successfuly created");
+                    $jsonReturned = array("status"=> "200");
 
 
                 } else {
-                    $jsonReturned = array("success" => "false", "message" => "the name must be a string and strength or weaponPower must be a int");
+                    $jsonReturned = array("status" => "400", "message" => "the name must be a string and strength or weaponPower must be a int");
                 }
             } else {
-                $jsonReturned = array("success" => "false", "message" => "name, strength or weaponPower can't be null");
+                $jsonReturned = array("success" => "400", "message" => "name, strength or weaponPower can't be null");
             }
             $serializer = $this->container->get('serializer');
 
