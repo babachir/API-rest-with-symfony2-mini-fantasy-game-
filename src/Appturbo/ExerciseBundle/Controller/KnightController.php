@@ -10,17 +10,16 @@ class KnightController extends Controller
 {
     public function getKnightsAction()
     {
+
         /*$arena = $this->container->get('appturbo_exercise.services');*/
         $knights = $this->getDoctrine()->getRepository("AppturboExerciseBundle:Knight")->findAll();
         if(empty($knights))
         {
-            $knights = array("status"=>"404");
+            return (new Response())->setStatusCode(404,Response::$statusTexts[404]);
         }
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($knights, 'json');
-        return new Response($reports);
-
-
+        return (new Response($reports))->setStatusCode(200,Response::$statusTexts[200]);
     }
 
     public function getKnightAction($id)
@@ -30,11 +29,11 @@ class KnightController extends Controller
         $knights = $this->getDoctrine()->getRepository("AppturboExerciseBundle:Knight")->findById($id);
         if(empty($knights))
         {
-            $knights = array("status"=>"404");
+            return (new Response())->setStatusCode(404,Response::$statusTexts[404]);
         }
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($knights, 'json');
-        return new Response($reports);
+        return  (new Response($reports))->setStatusCode(200,Response::$statusTexts[200]);
 
 
     }
@@ -47,17 +46,17 @@ class KnightController extends Controller
 
         if(empty($knights) || empty($knights2))
         {
-            $resultat = array("status"=>"404");
+            return (new Response())->setStatusCode(404,Response::$statusTexts[404]);
         }
 
         $resultat = $arena->fight($knights[0],$knights2[0]);
 
-    
+
 
 
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($resultat, 'json');
-        return new Response($reports);
+        return (new Response($reports))->setStatusCode(200,Response::$statusTexts[404]);
 
 
     }
@@ -89,14 +88,14 @@ class KnightController extends Controller
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($knight);
                     $em->flush();
-                    $jsonReturned = array("status"=> "200");
+                    return (new Response())->setStatusCode(201,Response::$statusTexts[201]);
 
 
                 } else {
-                    $jsonReturned = array("status" => "400", "message" => "the name must be a string and strength or weaponPower must be a int");
+                    return (new Response())->setStatusCode(400,Response::$statusTexts[400]);
                 }
             } else {
-                $jsonReturned = array("success" => "400", "message" => "name, strength or weaponPower can't be null");
+                return (new Response())->setStatusCode(400,Response::$statusTexts[400]);;
             }
             $serializer = $this->container->get('serializer');
 
