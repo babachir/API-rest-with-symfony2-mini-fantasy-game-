@@ -39,6 +39,29 @@ class KnightController extends Controller
 
     }
 
+    public function getKnightvsknightAction($id,$id2)
+    {
+        $arena = $this->container->get('appturbo_exercise.services');
+        $knights = $this->getDoctrine()->getRepository("AppturboExerciseBundle:Knight")->findById($id);
+        $knights2 = $this->getDoctrine()->getRepository("AppturboExerciseBundle:Knight")->findById($id2);
+
+        if(empty($knights) || empty($knights2))
+        {
+            $resultat = array("status"=>"404");
+        }
+
+        $resultat = $arena->fight($knights[0],$knights2[0]);
+
+    
+
+
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($resultat, 'json');
+        return new Response($reports);
+
+
+    }
+
     public function postKnightAction()
     {
         /*$arena = $this->container->get('appturbo_exercise.services');*/

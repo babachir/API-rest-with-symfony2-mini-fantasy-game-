@@ -1,6 +1,7 @@
 <?php
 namespace Appturbo\ExerciseBundle\Services;
 use Appturbo\ExerciseBundle\Entity\Knight;
+use Appturbo\ExerciseBundle\Model\FightInterface;
 
 
 /**
@@ -11,25 +12,25 @@ use Appturbo\ExerciseBundle\Entity\Knight;
  */
 class Arena
 {
-private $knight1;
-private $knight2;
 
-    /**
-     * @param mixed $knight1
-     */
-    public function setKnight1($knight1)
+
+    public static function fight(\Appturbo\ExerciseBundle\Entity\FightInterface $fighter1,\Appturbo\ExerciseBundle\Entity\FightInterface $fighter2)
     {
-        $this->knight1 = $knight1;
-    }
 
-    /**
-     * @param mixed $knight2
-     */
-    public function setKnight2($knight2)
-    {
-        $this->knight2 = $knight2;
-    }
+        if($fighter1->calculatePowerLevel()==$fighter2->calculatePowerLevel())
+        {
+            return 0;
+        }
+        else if($fighter1->calculatePowerLevel()>$fighter2->calculatePowerLevel())
+        {
+            return $fighter1;
+        }
+        else
+        {
+            return $fighter2;
+        }
 
+    }
 
 
 
